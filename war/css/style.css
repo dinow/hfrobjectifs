@@ -1,0 +1,145 @@
+@font-face{
+font-family: OpenSansRegular;
+	src: url('../fonts/OpenSans-Regular.ttf');
+}
+body,p,a,span,h1,h2,h3,td,th,div {
+	font-size: 10pt;
+	font-family: OpenSansRegular, Verdana;
+}
+
+body {
+	margin: 0px;
+	background-color: #FBF9F5; 
+}
+
+div.newObjective{
+	float: left;
+	height: 100%;
+	width: 30%;
+	display: none;
+	border-right-color: #cccccc;
+	border-right-style: solid;
+	border-right-width: 1px;
+}
+
+div.existingObjectives{
+	height: 100%;
+	padding-left: 10px;
+}
+
+div.userDiv{
+	position: absolute;
+	right: 15px;
+	top:9px;
+	z-index: 99;
+}
+
+div.preferenceDiv{
+	position: absolute;
+	top: 23px;
+	z-index: 100;
+	right: 12px;
+	padding: 15px;
+	display: none;
+}
+
+.arrow_box {
+	position: relative;
+	background: #ffffff;
+	border: 1px solid #000000;
+	border-radius: 6px;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #ffffff;
+	border-width: 5px;
+	margin-left: -5px;
+}
+.arrow_box:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-bottom-color: #000000;
+	border-width: 6px;
+	margin-left: -6px;
+}
+
+
+.dnoLink{
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	border-bottom-color: #919191;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+.dnoLink:VISITED, .dnoLink:ACTIVE, .dnoLink:LINK{
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	border-bottom-color: #919191;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.dnoLink:HOVER{
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+
+div.headerDiv{
+	width:100%; 
+	background-color: #F5E1C2; 
+	height: 30px; 
+	padding-top: 10px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	padding-left: 40px;
+}
+
+div.mainPage{
+	padding-top:70px;
+	width: 100%;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+table.noheadTable{
+	border-spacing: 1;
+}
+
+table.noheadTable tr th{
+	background-color: #AAA;
+}
+
+table.noheadTable tr td{
+	padding: 5px;
+}
+
+table.noheadTable tr:nth-child(even) {background: #CCC}
+table.noheadTable tr:nth-child(odd) {background: #FFF}
+
+div.createNew{
+	position: absolute;
+	left: 5px;
+	top:42px;
+}
+
+.smallText{
+	font-size: 9pt;
+}

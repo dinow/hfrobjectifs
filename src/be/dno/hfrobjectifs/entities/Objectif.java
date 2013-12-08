@@ -1,16 +1,23 @@
 package be.dno.hfrobjectifs.entities;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Objectif {
+public class Objectif implements Serializable{
 	
+	private static final long serialVersionUID = -3250172380979288157L;
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	private Long id;
+	
+	@Persistent
+	private String name;
 	
 	@Persistent
 	private Long evenementId;
@@ -35,6 +42,9 @@ public class Objectif {
 	
 	@Persistent
 	private boolean objectifPrive;
+	
+	@Persistent
+	private float poids;
 
 	public Long getId() {
 		return id;
@@ -103,6 +113,24 @@ public class Objectif {
 	public void setObjectifPrive(boolean objectifPrive) {
 		this.objectifPrive = objectifPrive;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getPoids() {
+		return poids;
+	}
+
+	public void setPoids(float poids) {
+		this.poids = poids;
+	}
+
+	
 	
 	
 }

@@ -21,9 +21,6 @@ public class User implements Serializable{
 	private String hfrUserName;
 	
 	@Persistent
-	private double poids;
-	
-	@Persistent
 	private int taille;
 	
 	@Persistent
@@ -34,6 +31,19 @@ public class User implements Serializable{
 	
 	@Persistent
 	private List<Long> objectifsIds;
+	
+	@Persistent
+	private List<Long> eventsIds;
+
+	
+	
+	public List<Long> getEventsIds() {
+		return eventsIds;
+	}
+
+	public void setEventsIds(List<Long> eventsIds) {
+		this.eventsIds = eventsIds;
+	}
 
 	public String getUserID() {
 		return userID;
@@ -49,14 +59,6 @@ public class User implements Serializable{
 
 	public void setHfrUserName(String hfrUserName) {
 		this.hfrUserName = hfrUserName;
-	}
-
-	public double getPoids() {
-		return poids;
-	}
-
-	public void setPoids(double poids) {
-		this.poids = poids;
 	}
 
 	public int getTaille() {
@@ -94,7 +96,7 @@ public class User implements Serializable{
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", hfrUserName=" + hfrUserName
-				+ ", poids=" + poids + ", taille=" + taille + ", sexe=" + sexe
+				+ ", taille=" + taille + ", sexe=" + sexe
 				+ ", dateNaissance=" + dateNaissance + ", objectifsIds="
 				+ objectifsIds + "]";
 	}
