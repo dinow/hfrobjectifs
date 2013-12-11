@@ -2,6 +2,7 @@
 <%@ page import="com.google.appengine.api.users.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://hfr.appsport.com/taglib/functions" prefix="hfr"%>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
 	<title>Objectifs@HFR</title>
@@ -35,15 +36,24 @@
 		</div>
 		<div class="existingObjectives">
 			<table class="noheadTable">
-				<tr><th>Evénements existants</th></tr>
-				<c:forEach items="${events}" var="event">
+				<tr><th>Mes Evénements</th></tr>
+				<c:forEach items="${events.my}" var="event">
 					<c:set var="event" value="${event}" />
 					<tr><td>
-						${event.name }<br/>
+						<tags:evenement event="${event}"  />
 						<form action="/delete_event.do" method="post">
 							<input type="submit" value="Supprimer" />
 							<input type="hidden" value="${event.id }" name="eventId"/>
 						</form>
+					</td></tr>
+				</c:forEach>		
+			</table>
+			<table class="noheadTable">
+				<tr><th>Autres Evénements</th></tr>
+				<c:forEach items="${events.their}" var="event">
+					<c:set var="event" value="${event}" />
+					<tr><td>
+						<tags:evenement event="${event}"  />
 					</td></tr>
 				</c:forEach>		
 			</table>

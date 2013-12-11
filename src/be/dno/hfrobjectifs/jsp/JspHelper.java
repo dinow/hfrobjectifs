@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -29,7 +30,10 @@ public class JspHelper {
 		UserService userService = UserServiceFactory.getUserService();
 		GenericDao<User> userDao = new GenericDao<User>(User.class);
 		User user = userDao.getById(userService.getCurrentUser().getUserId());
-		List<Evenement> events = GeneralHelper.getEventsForUser(user);
+		Map<String,List<Evenement>> allEvents = GeneralHelper.getEventsForUser(user);
+		
+		List<Evenement> events = allEvents.get("my");
+		events.addAll(allEvents.get("their"));
 		String ret = "";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for (Evenement evt : events){

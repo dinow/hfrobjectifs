@@ -12,7 +12,12 @@
 	
 	<%@ include file="header.jsp"%>
 	<div class="mainPage">
-		preferences...
+		<h3>Edition utilisateur</h3>
+		<form action="/save_profile.do" method="post"> 
+			Id Google : ${user.userID }<br/>
+			Pseudo HFR: <input type="text" name="hfrUserName" value="${user.hfrUserName }"><br/>
+			<input type="submit" value="Save" />
+		</form>
 	</div>
 </body>
 </html>

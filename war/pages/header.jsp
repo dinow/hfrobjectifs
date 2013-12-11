@@ -10,7 +10,7 @@
 	<%
 		}else{
 			%>
-			<a href="<%= userService.createLoginURL("/login.do") %>" class="dnoLink" title="Se connecter">Connection</a>
+			<a href="<%= userService.createLoginURL("/myObjectives.do") %>" class="dnoLink" title="Se connecter">Connection</a>
 			<%
 		}
 		%>
@@ -19,7 +19,7 @@
 <div id="preferenceDiv" class="preferenceDiv">
 	<div class="arrow_box">
 		<table class="noheadTable">
-			<tr><td><a href="/myPreferences.do" title="Preferences" class="dnoLink" onclick="displayDiv('preferenceDiv',false);">Preferences</a></td></tr>
+			<tr><td><a href="/editProfile.do" title="Preferences" class="dnoLink" onclick="displayDiv('preferenceDiv',false);">Preferences</a></td></tr>
 			<tr><td><a href="<%= userService.createLogoutURL("/") %>" title="Deconnection" class="dnoLink" onclick="displayDiv('preferenceDiv',false);">Deconnection</a></td></tr>
 		</table>
 	</div>
@@ -31,7 +31,7 @@
 	%>
 	<a href="/myObjectives.do" title="Objectifs" class="dnoLink">Objectifs</a>
 	<a href="/myEvents.do" title="Evenements" class="dnoLink">Evenements</a>
-	<a href="/allRanking.do" title="Classements" class="dnoLink">Classements</a>
+	<!-- <a href="/allRanking.do" title="Classements" class="dnoLink">Classements</a>  -->
 		<%
 		}
 		%>

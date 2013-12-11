@@ -1,6 +1,7 @@
 package be.dno.hfrobjectifs.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class User implements Serializable{
 	
 	
 	public List<Long> getEventsIds() {
+		if (eventsIds == null){
+			eventsIds = new ArrayList<Long>();
+		}
 		return eventsIds;
 	}
 
@@ -86,6 +90,9 @@ public class User implements Serializable{
 	}
 
 	public List<Long> getObjectifsIds() {
+		if (objectifsIds == null){
+			objectifsIds = new ArrayList<Long>();
+		}
 		return objectifsIds;
 	}
 

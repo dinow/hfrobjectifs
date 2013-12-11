@@ -26,10 +26,10 @@ public class Objectif implements Serializable{
 	private int annee;
 	
 	@Persistent
-	private int tempsPrevu;
+	private double tempsPrevu;
 	
 	@Persistent
-	private int tempsRealise;
+	private double tempsRealise;
 	
 	@Persistent
 	private boolean result;
@@ -66,19 +66,19 @@ public class Objectif implements Serializable{
 		this.annee = annee;
 	}
 
-	public int getTempsPrevu() {
+	public double getTempsPrevu() {
 		return tempsPrevu;
 	}
 
-	public void setTempsPrevu(int tempsPrevu) {
+	public void setTempsPrevu(double tempsPrevu) {
 		this.tempsPrevu = tempsPrevu;
 	}
 
-	public int getTempsRealise() {
+	public double getTempsRealise() {
 		return tempsRealise;
 	}
 
-	public void setTempsRealise(int tempsRealise) {
+	public void setTempsRealise(double tempsRealise) {
 		this.tempsRealise = tempsRealise;
 	}
 

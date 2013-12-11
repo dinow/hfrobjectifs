@@ -2,6 +2,7 @@
 <%@ page import="com.google.appengine.api.users.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://hfr.appsport.com/taglib/functions" prefix="hfr"%>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
 	<title>Objectifs@HFR</title>
@@ -36,14 +37,23 @@
 		
 			<table class="noheadTable">
 				<tr><th>Objectifs existants</th></tr>
-				<c:forEach items="${objectives}" var="objective">
+				<c:forEach items="${objectives.my}" var="objective">
 					<c:set var="objective" value="${objective}" />
 					<tr><td>
-						${objective.name }<br/>
+						<tags:objectif objectif="${objective}"  />
 						<form action="/delete_objectif.do" method="post">
 							<input type="submit" value="Supprimer" />
 							<input type="hidden" value="${objective.id }" name="objectifId"/>
 						</form>
+					</td></tr>
+				</c:forEach>		
+			</table>
+			<table class="noheadTable">
+				<tr><th>Objectifs publics</th></tr>
+				<c:forEach items="${objectives.their}" var="objective">
+					<c:set var="objective" value="${objective}" />
+					<tr><td>
+						<tags:objectif objectif="${objective}"  />
 					</td></tr>
 				</c:forEach>		
 			</table>
