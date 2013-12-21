@@ -12,6 +12,8 @@ body {
 	background-color: #FBF9F5; 
 }
 
+
+
 div.newObjective{
 	float: left;
 	height: 100%;
@@ -20,6 +22,12 @@ div.newObjective{
 	border-right-color: #cccccc;
 	border-right-style: solid;
 	border-right-width: 1px;
+}
+
+div.popup{
+	position: absolute;
+	top: 43px;
+	left: 204px;
 }
 
 div.existingObjectives{
@@ -140,6 +148,25 @@ div.createNew{
 	top:42px;
 }
 
+div.userList{
+	padding-top: 70px;
+	width: 100%;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 .smallText{
 	font-size: 9pt;
+}
+.resultNeutral{
+	background-color: #cccccc !important;
+}
+
+.resultOk{
+	background-color: #16bc45 !important;
+}
+
+
+.resultKo{
+	background-color: #e13030 !important;
 }

@@ -6,7 +6,7 @@
 	<title>Objectifs@HFR</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="../js/hfrobjectifs.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
 </head>
 <body>
 	

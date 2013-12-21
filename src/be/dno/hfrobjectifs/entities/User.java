@@ -35,9 +35,23 @@ public class User implements Serializable{
 	
 	@Persistent
 	private List<Long> eventsIds;
+	
+	@Persistent
+	private List<Long> eventParticipationIds;
+	
+	@Persistent
+	private boolean admin;
 
 	
 	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 	public List<Long> getEventsIds() {
 		if (eventsIds == null){
 			eventsIds = new ArrayList<Long>();
@@ -100,13 +114,18 @@ public class User implements Serializable{
 		this.objectifsIds = objectifsIds;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userID=" + userID + ", hfrUserName=" + hfrUserName
-				+ ", taille=" + taille + ", sexe=" + sexe
-				+ ", dateNaissance=" + dateNaissance + ", objectifsIds="
-				+ objectifsIds + "]";
+	public List<Long> getEventParticipationIds() {
+		if (eventParticipationIds == null){
+			eventParticipationIds = new ArrayList<Long>();
+		}
+		return eventParticipationIds;
 	}
+
+	public void setEventParticipationIds(List<Long> eventParticipationIds) {
+		this.eventParticipationIds = eventParticipationIds;
+	}
+
+	
 	
 	
 }

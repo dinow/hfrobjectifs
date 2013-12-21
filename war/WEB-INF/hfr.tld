@@ -13,34 +13,98 @@
     
     <function>
         <description>return the list of public events</description>
+        <name>getObjectivesForUser</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>List getObjectivesForUser()</function-signature>
+    </function>
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>getUsers</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>List getUsers()</function-signature>
+    </function>
+    
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>getEventsForUser</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>java.lang.String getEventsForUser()</function-signature>
+    </function>
+    
+    
+    <function>
+        <description>return the list of public events</description>
         <name>getNextYearsForDropDown</name>
-        <function-class>be.dno.hfrobjectifs.jsp.JspHelper</function-class>
-        <function-signature>java.lang.String getNextYearsForDropDown(int)</function-signature>
-        <example>
-            ${hfr:getNextYearsForDropDown(5)}
-        </example>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>java.lang.String getNextYearsForDropDown(int, be.dno.hfrobjectifs.entities.Objectif)</function-signature>
     </function>
     
     <function>
         <description>return the list of public events</description>
         <name>getEventsTypes</name>
-        <function-class>be.dno.hfrobjectifs.jsp.JspHelper</function-class>
-        <function-signature>java.lang.String getEventsTypes()</function-signature>
-        <example>
-            ${hfr:getEventsTypes()}
-        </example>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>java.lang.String getEventsTypes(be.dno.hfrobjectifs.entities.Evenement)</function-signature>
     </function>
     
     <function>
         <description>return the list of public events</description>
         <name>getEventsDropDown</name>
-        <function-class>be.dno.hfrobjectifs.jsp.JspHelper</function-class>
-        <function-signature>java.lang.String getEventsDropDown()</function-signature>
-        <example>
-            ${hfr:getEventsDropDown()}
-        </example>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>java.lang.String getEventsDropDown(be.dno.hfrobjectifs.entities.Objectif)</function-signature>
+    </function>
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>isEmptyString</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>boolean isEmptyString(java.lang.String)</function-signature>
+    </function>
+    
+	<function>
+        <description>return the list of public events</description>
+        <name>getParticipants</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>List getParticipants(be.dno.hfrobjectifs.entities.Evenement)</function-signature>
+    </function>
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>isParticipating</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>boolean isParticipating(be.dno.hfrobjectifs.entities.Evenement)</function-signature>
     </function>
     
     
+    <function>
+        <description>return the list of public events</description>
+        <name>getPublicObjectivesForUser</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>List getPublicObjectivesForUser(be.dno.hfrobjectifs.entities.User)</function-signature>
+    </function>
 
+    <function>
+        <description>return the list of public events</description>
+        <name>getParticipationsForUser</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>List getParticipationsForUser(be.dno.hfrobjectifs.entities.User)</function-signature>
+    </function>
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>getObjectifClass</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>java.lang.String getObjectifClass(be.dno.hfrobjectifs.entities.Objectif)</function-signature>
+    </function>
+    
+    <function>
+        <description>return the list of public events</description>
+        <name>getEventFromObjectif</name>
+        <function-class>be.dno.hfrobjectifs.tools.GeneralHelper</function-class>
+        <function-signature>be.dno.hfrobjectifs.entities.Evenement getEventFromObjectif(be.dno.hfrobjectifs.entities.Objectif)</function-signature>
+    </function>
+    
+    
+    
 </taglib>

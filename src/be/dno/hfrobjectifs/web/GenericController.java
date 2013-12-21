@@ -2,8 +2,8 @@ package be.dno.hfrobjectifs.web;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import be.dno.hfrobjectifs.entities.Evenement;
 import be.dno.hfrobjectifs.entities.Objectif;
 import be.dno.hfrobjectifs.entities.User;
+import be.dno.hfrobjectifs.persistence.EventDao;
 import be.dno.hfrobjectifs.persistence.GenericDao;
 import be.dno.hfrobjectifs.tools.CalcHelper;
 import be.dno.hfrobjectifs.tools.GeneralHelper;
@@ -39,8 +40,7 @@ public class GenericController {
 	public ModelAndView myObjectives(HttpServletRequest request) {
 		int userCheck = genericUserCheck();
 		if (userCheck == USER_OK){
-			User user = userDao.getById(userService.getCurrentUser().getUserId());
-			return new ModelAndView("myObjectives", "objectives", GeneralHelper.getObjectivesForUser(user));
+			return new ModelAndView("myObjectives");
 		}
 		if (userCheck == USER_CREATED){
 			User user = userDao.getById(userService.getCurrentUser().getUserId());
@@ -60,13 +60,17 @@ public class GenericController {
 			user.setHfrUserName(hfrUserName);
 		}
 		userDao.update(user);
-		return new ModelAndView("myObjectives","user",user);
+		return new ModelAndView("editProfile","user",user);
 	}
 	
+	
+	@RequestMapping(value = "/showUsers", method = RequestMethod.GET)
+	public ModelAndView showUsers(HttpServletRequest request) {
+		return new ModelAndView("showUsers");
+	}
 	@RequestMapping(value = "/myEvents", method = RequestMethod.GET)
 	public ModelAndView myEvents(HttpServletRequest request) {
-		User user = userDao.getById(userService.getCurrentUser().getUserId());
-		return new ModelAndView("myEvents","events",GeneralHelper.getEventsForUser(user));
+		return new ModelAndView("myEvents");
 	}
 	
 	@RequestMapping(value = "/allRanking", method = RequestMethod.GET)
@@ -82,7 +86,7 @@ public class GenericController {
 		user.getObjectifsIds().remove(lObjectifId);
 		userDao.update(user);
 		objectifDao.delete(lObjectifId);
-		return new ModelAndView("myObjectives","objectives", GeneralHelper.getObjectivesForUser(user) );
+		return new ModelAndView("myObjectives","message", "objectif supprimé" );
 	}
 	
 	@RequestMapping(value = "/delete_event", method = RequestMethod.POST)
@@ -93,19 +97,44 @@ public class GenericController {
 		user.getEventsIds().remove(lEventId);
 		userDao.update(user);
 		eventDao.delete(lEventId);
-		return new ModelAndView("myEvents","events",GeneralHelper.getEventsForUser(user));
+		return new ModelAndView("myEvents","message","Evenement supprimé");
 	}
 	
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public ModelAndView editProfile(HttpServletRequest request) {
+		return new ModelAndView("editProfile");
+	}
+
+	@RequestMapping(value = "/removeParticipation_event", method = RequestMethod.POST)
+	public ModelAndView removeParticipation_event(HttpServletRequest request) {
+		String eventId = request.getParameter("eventId");
+		Long lEventId = Long.parseLong(eventId);
+		User user = userDao.getById(userService.getCurrentUser().getUserId());
+		user.getEventParticipationIds().remove(lEventId);
+		userDao.update(user);
+		GeneralHelper.setEventBooleanValue(eventDao.getById(lEventId), user);
+		return new ModelAndView("myEvents","message","Participation supprimée");
+	}
 	
-	
+	@RequestMapping(value = "/participate_event", method = RequestMethod.POST)
+	public ModelAndView participate_event(HttpServletRequest request) {
+		String eventId = request.getParameter("eventId");
+		Long lEventId = Long.parseLong(eventId);
+		User user = userDao.getById(userService.getCurrentUser().getUserId());
+		user.getEventParticipationIds().add(lEventId);
+		userDao.update(user);
+		GeneralHelper.setEventBooleanValue(eventDao.getById(lEventId), user);
+		return new ModelAndView("myEvents","message","Participation enregistrée");
+	}
 	
 	@RequestMapping(value = "/save_event", method = RequestMethod.POST)
 	public ModelAndView save_event(HttpServletRequest request) {
 		
 		User user = userDao.getById(userService.getCurrentUser().getUserId());
-		if (user.getEventsIds() == null){
-			user.setEventsIds(new ArrayList<Long>());
-		}
+		
+		EventDao evtDao = new EventDao();
+		
+		
 		
 		String nom = GeneralHelper.noNull(request.getParameter("name"));
 		String date = GeneralHelper.noNull(request.getParameter("date"));
@@ -115,7 +144,14 @@ public class GenericController {
 		String urlOff  = GeneralHelper.noNull(request.getParameter("officialUrl"));
 		String urlResult = GeneralHelper.noNull(request.getParameter("resultUrl"));
 		String type = GeneralHelper.noNull(request.getParameter("type"));
-		String prive = GeneralHelper.noNull(request.getParameter("evenementPrive"));
+		String eventId = GeneralHelper.noNull(request.getParameter("eventId"));
+		
+		if (nom.isEmpty()){
+			nom = System.currentTimeMillis() + "";
+		}
+		
+		
+		
 		
 		Date dateEvt = new java.util.Date();
 		if (!date.isEmpty()){
@@ -132,29 +168,51 @@ public class GenericController {
 			dist = Float.parseFloat(distance);
 		}
 		
-		if (prive == null){
-			prive = "off";
-		}
 		
-		Evenement event = new Evenement();
+		Evenement event;
+		if(eventId == null){
+			event = new Evenement();
+		}else{
+			event = eventDao.getById(Long.parseLong(eventId));
+		}
+	
 		event.setName(nom);
 		event.setDistance(dist);
 		event.setUrlEvenement(urlOff);
 		event.setUrlResultats(urlResult);
 		event.setVille(ville);
 		event.setDateEvenement(new java.util.Date());
-		event.setEvenementPrive(prive.equals("on"));
 		event.setPays(pays);
 		event.setType(type);
 		event.setDateEvenement(dateEvt);
 		
-		
-		event = eventDao.create(event);
-		user.getEventsIds().add(event.getId());
-		userDao.update(user);
-		return new ModelAndView("myEvents","events",GeneralHelper.getEventsForUser(user));
+		if(eventId == null){
+			List<Evenement> existings = evtDao.getEventByName(nom);
+			if (existings.size() > 0){
+				return new ModelAndView("myEvents","message","Un evenement avec ce nom existe déjà");
+			}
+			event = eventDao.create(event);
+			user.getEventsIds().add(event.getId());
+			userDao.update(user);
+		}else{
+			eventDao.update(event);
+		}
+		return new ModelAndView("myEvents");
 	}
 	
+	@RequestMapping(value= "/edit_objectif", method = RequestMethod.POST)
+	public ModelAndView edit_objectif(HttpServletRequest request) {
+		String objId 	= GeneralHelper.noNull(request.getParameter("objectifId"));
+		Long lObjId = Long.parseLong(objId);
+		return new ModelAndView("myObjectives", "objectif", objectifDao.getById(lObjId) );
+	}
+	
+	@RequestMapping(value= "/edit_event", method = RequestMethod.POST)
+	public ModelAndView edit_event(HttpServletRequest request) {
+		String objId 	= GeneralHelper.noNull(request.getParameter("eventId"));
+		Long lObjId = Long.parseLong(objId);
+		return new ModelAndView("myEvents", "inputEvent", eventDao.getById(lObjId) );
+	}
 	
 	@RequestMapping(value = "/save_objectif", method = RequestMethod.POST)
 	public ModelAndView save_objectif(HttpServletRequest request) {
@@ -164,48 +222,70 @@ public class GenericController {
 		String evenementId 	= GeneralHelper.noNull(request.getParameter("evenement"));
 		String annee 		= GeneralHelper.noNull(request.getParameter("annee"));
 		String tempsPrevu 	= GeneralHelper.noNull(request.getParameter("tempsPrevu"));
-		String poids 		= GeneralHelper.noNull(request.getParameter("poids"));
+		String tempsRealise 	= GeneralHelper.noNull(request.getParameter("tempsRealise"));
+		String poidsPrevu 		= GeneralHelper.noNull(request.getParameter("poidsPrevu"));
+		String poidsRealise 		= GeneralHelper.noNull(request.getParameter("poidsRealise"));
 		String objectifPrive = GeneralHelper.noNull(request.getParameter("objectifPrive"));
+		String linkActivity = GeneralHelper.noNull(request.getParameter("linkActivite"));
+		String linkHfr = GeneralHelper.noNull(request.getParameter("linkCR"));
+		String objectifId = request.getParameter("objectifId");
 		
 		if (annee.isEmpty()){
-			return new ModelAndView("myObjectives","objectives", GeneralHelper.getObjectivesForUser(user) );
+			return new ModelAndView("myObjectives","message", "Année incorrecte");
 		}
 		
-		double tempsSeconds = 0;
+		double tempsPrevuSeconds = 0;
 		if (!tempsPrevu.isEmpty()){
-			tempsSeconds = CalcHelper.getTotSecs(tempsPrevu);
+			tempsPrevuSeconds = CalcHelper.getTotSecs(tempsPrevu);
+		}
+		
+		double tempsRealiseSeconds = 0;
+		if (!tempsRealise.isEmpty()){
+			tempsRealiseSeconds = CalcHelper.getTotSecs(tempsRealise);
 		}
 		
 		if (objectifPrive.isEmpty()){
 			objectifPrive = "off";
 		}
 		
-		float fPoids = 0f;
-		if (!poids.isEmpty()){
-			fPoids = Float.parseFloat(poids);
+		float fPoidsP = 0f;
+		if (!poidsPrevu.isEmpty()){
+			fPoidsP = Float.parseFloat(poidsPrevu);
+		}
+		float fPoidsR = 0f;
+		if (!poidsRealise.isEmpty()){
+			fPoidsR = Float.parseFloat(poidsRealise);
 		}
 		
-		Objectif objectif = new Objectif();
+		Objectif objectif;
+		if(objectifId == null){
+			objectif = new Objectif();
+		}else{
+			objectif = objectifDao.getById(Long.parseLong(objectifId));
+		}
 		
-		if (!evenementId.isEmpty()){
+		if (!evenementId.trim().isEmpty()){
 			objectif.setEvenementId(Long.parseLong(evenementId));
 		}
 		
 		objectif.setName(name);
 		objectif.setAnnee(Integer.parseInt(annee));
 		objectif.setObjectifPrive(objectifPrive.equals("on"));
-		objectif.setTempsPrevu(tempsSeconds);
-		objectif.setPoids(fPoids);
+		objectif.setTempsPrevu(tempsPrevuSeconds);
+		objectif.setTempsRealise(tempsRealiseSeconds);
+		objectif.setPoidsPrevu(fPoidsP);
+		objectif.setPoidsRealise(fPoidsR);
+		objectif.setLienActivite(linkActivity);
+		objectif.setLienHFR(linkHfr);
 		
-		objectif = objectifDao.create(objectif);
-	
-		
-		if (user.getObjectifsIds() == null){
-			user.setObjectifsIds(new ArrayList<Long>());
+		if(objectifId == null){
+			objectif = objectifDao.create(objectif);
+			user.getObjectifsIds().add(objectif.getId());
+			userDao.update(user);
+		}else{
+			objectifDao.update(objectif);
 		}
-		user.getObjectifsIds().add(objectif.getId());
-		userDao.update(user);
-		return new ModelAndView("myObjectives","objectives", GeneralHelper.getObjectivesForUser(user) );
+		return new ModelAndView("myObjectives" );
 	}
 		
 	public int genericUserCheck() {
@@ -214,6 +294,7 @@ public class GenericController {
 			if (user == null){
 				user = new User();
 				user.setUserID(userService.getCurrentUser().getUserId());
+				user.setHfrUserName("");
 				user = userDao.create(user);
 				return USER_CREATED;
 			}	

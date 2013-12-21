@@ -10,7 +10,7 @@
 	<%
 		}else{
 			%>
-			<a href="<%= userService.createLoginURL("/myObjectives.do") %>" class="dnoLink" title="Se connecter">Connection</a>
+			<table><tr><td style="padding-right: 20px;"><img src="./images/line_arrow_end.png" /></td><td><a href="<%= userService.createLoginURL("/myObjectives.do") %>" class="dnoLink" title="Se connecter">Connection</a></td></tr></table>	
 			<%
 		}
 		%>
@@ -31,7 +31,7 @@
 	%>
 	<a href="/myObjectives.do" title="Objectifs" class="dnoLink">Objectifs</a>
 	<a href="/myEvents.do" title="Evenements" class="dnoLink">Evenements</a>
-	<!-- <a href="/allRanking.do" title="Classements" class="dnoLink">Classements</a>  -->
+	<a href="/showUsers.do" title="Utilisateurs" class="dnoLink">Utilisateurs</a>
 		<%
 		}
 		%>

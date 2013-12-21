@@ -1,6 +1,7 @@
 package be.dno.hfrobjectifs.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -36,15 +37,23 @@ public class Evenement implements Serializable{
 	private String urlResultats;
 	
 	@Persistent
-	private boolean evenementPrive;
-	
-	@Persistent
 	private Date dateEvenement;
 	
 	@Persistent
 	private String type;
 	
+	@Persistent
+	private boolean usedBySomeoneElse;
 	
+	
+
+	public boolean isUsedBySomeoneElse() {
+		return usedBySomeoneElse;
+	}
+
+	public void setUsedBySomeoneElse(boolean usedBySomeoneElse) {
+		this.usedBySomeoneElse = usedBySomeoneElse;
+	}
 
 	public String getType() {
 		return type;
@@ -94,14 +103,6 @@ public class Evenement implements Serializable{
 		this.urlResultats = urlResultats;
 	}
 
-	public boolean isEvenementPrive() {
-		return evenementPrive;
-	}
-
-	public void setEvenementPrive(boolean evenementPrive) {
-		this.evenementPrive = evenementPrive;
-	}
-
 	public Date getDateEvenement() {
 		return dateEvenement;
 	}
@@ -124,5 +125,10 @@ public class Evenement implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getDateEvenementStr(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(this.dateEvenement);
 	}
 }

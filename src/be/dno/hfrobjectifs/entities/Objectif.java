@@ -7,6 +7,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import be.dno.hfrobjectifs.tools.CalcHelper;
+
 @PersistenceCapable
 public class Objectif implements Serializable{
 	
@@ -44,7 +46,28 @@ public class Objectif implements Serializable{
 	private boolean objectifPrive;
 	
 	@Persistent
-	private float poids;
+	private float poidsPrevu;
+	
+	@Persistent
+	private float poidsRealise;
+	
+	
+
+	public float getPoidsPrevu() {
+		return poidsPrevu;
+	}
+
+	public void setPoidsPrevu(float poidsPrevu) {
+		this.poidsPrevu = poidsPrevu;
+	}
+
+	public float getPoidsRealise() {
+		return poidsRealise;
+	}
+
+	public void setPoidsRealise(float poidsRealise) {
+		this.poidsRealise = poidsRealise;
+	}
 
 	public Long getId() {
 		return id;
@@ -121,16 +144,18 @@ public class Objectif implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public float getPoids() {
-		return poids;
+	
+	public String getTempsPrevuStr(){
+		if (tempsPrevu == 0){
+			return "";
+		}
+		return CalcHelper.toTime(tempsPrevu);
 	}
-
-	public void setPoids(float poids) {
-		this.poids = poids;
+	
+	public String getTempsRealiseStr(){
+		if (tempsRealise == 0){
+			return "";
+		}
+		return CalcHelper.toTime(tempsRealise);
 	}
-
-	
-	
-	
 }
