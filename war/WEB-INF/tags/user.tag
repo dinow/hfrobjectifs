@@ -13,20 +13,20 @@
 		<td>
 		<table>
 			<tr>
-				<td>
+				<td style="vertical-align: top;">
 					<table>
 						<tr><th>Evenements</th></tr>
-						<tr><td>
+						<tr><td style="background-color: #ffffff;">
 							<c:forEach var="participation" items="${participations }">
 								<tags:evenement event="${participation}"  />
 							</c:forEach>
 						</td></tr>
 					</table>
 				</td>
-				<td>
+				<td style="vertical-align: top;">
 					<table>
 						<tr><th>Objectifs</th></tr>
-						<tr><td style="padding-bottom: 5px;">
+						<tr><td style="padding-bottom: 5px;background-color: #ffffff;">
 							<c:forEach var="objectif" items="${objectifs }">
 								<tags:objectif objectif="${objectif}"  />
 							</c:forEach>

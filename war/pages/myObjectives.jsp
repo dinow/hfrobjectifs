@@ -63,11 +63,14 @@
 		<div class="existingObjectives">
 		
 			<table class="noheadTable">
-				<tr><th>Objectifs existants</th></tr>
+				<tr><th colspan="2">Objectifs existants</th></tr>
 				<c:forEach items="${objectives}" var="objective">
 					<c:set var="objective" value="${objective}" />
 					<tr><td>
 						<tags:objectif objectif="${objective}"  />
+						
+					</td>
+					<td style="vertical-align: top;">
 						<form action="/delete_objectif.do" method="post">
 							<input type="submit" value="Supprimer" />
 							<input type="hidden" value="${objective.id }" name="objectifId"/>
@@ -76,7 +79,8 @@
 							<input type="submit" value="Editer" />
 							<input type="hidden" value="${objective.id }" name="objectifId"/>
 						</form>
-					</td></tr>
+					</td>
+					</tr>
 				</c:forEach>		
 			</table>
 		</div>

@@ -60,57 +60,57 @@
 		</div>
 		<div class="existingObjectives">
 			<table class="noheadTable">
-				<tr><th>Mes Evénements</th></tr>
+				<tr><th colspan="2">Mes Evénements</th></tr>
 				<c:forEach items="${events.my}" var="event">
 					<c:set var="event" value="${event}" />
 					<tr><td>
 						<tags:evenement event="${event}"  />
+					</td>
+					<td style="vertical-align: top;">
 						<c:if test="${!event.usedBySomeoneElse }">
 							<form action="/delete_event.do" method="post">
-								<input type="submit" value="Supprimer" />
-								<input type="hidden" value="${event.id }" name="eventId"/>
+								<input type="submit" value="Supprimer" /><input type="hidden" value="${event.id }" name="eventId"/>
 							</form>
 						</c:if>
 						<form action="/edit_event.do" method="post">
-							<input type="submit" value="Editer" />
-							<input type="hidden" value="${event.id }" name="eventId"/>
+							<input type="submit" value="Editer" /><input type="hidden" value="${event.id }" name="eventId"/>
 						</form>
 						<c:if test="${!hfr:isParticipating(event) }">
 							<form action="/participate_event.do" method="post">
-								<input type="submit" value="Participer" />
-								<input type="hidden" value="${event.id }" name="eventId"/>
+								<input type="submit" value="Participer" /><input type="hidden" value="${event.id }" name="eventId"/>
 							</form>
 						</c:if>
 						<c:if test="${hfr:isParticipating(event) }">
 							<form action="/removeParticipation_event.do" method="post">
-								<input type="submit" value="Ne plus participer" />
-								<input type="hidden" value="${event.id }" name="eventId"/>
+								<input type="submit" value="Ne plus participer" /><input type="hidden" value="${event.id }" name="eventId"/>
 							</form>
 						</c:if>
 					</td></tr>
 				</c:forEach>		
 			</table>
-			<table class="noheadTable">
-				<tr><th>Autres Evénements</th></tr>
-				<c:forEach items="${events.their}" var="event">
-					<c:set var="event" value="${event}" />
-					<tr><td>
-						<tags:evenement event="${event}"  />
-						<c:if test="${!hfr:isParticipating(event) }">
-							<form action="/participate_event.do" method="post">
-								<input type="submit" value="Participer" />
-								<input type="hidden" value="${event.id }" name="eventId"/>
-							</form>
-						</c:if>
-						<c:if test="${hfr:isParticipating(event) }">
-							<form action="/removeParticipation_event.do" method="post">
-								<input type="submit" value="Ne plus participer" />
-								<input type="hidden" value="${event.id }" name="eventId"/>
-							</form>
-						</c:if>
-					</td></tr>
-				</c:forEach>		
-			</table>
+			<c:if test="${!empty events.their }">
+				<table class="noheadTable">
+					<tr><th>Autres Evénements</th></tr>
+					<c:forEach items="${events.their}" var="event">
+						<c:set var="event" value="${event}" />
+						<tr><td>
+							<tags:evenement event="${event}"  />
+							<c:if test="${!hfr:isParticipating(event) }">
+								<form action="/participate_event.do" method="post">
+									<input type="submit" value="Participer" />
+									<input type="hidden" value="${event.id }" name="eventId"/>
+								</form>
+							</c:if>
+							<c:if test="${hfr:isParticipating(event) }">
+								<form action="/removeParticipation_event.do" method="post">
+									<input type="submit" value="Ne plus participer" />
+									<input type="hidden" value="${event.id }" name="eventId"/>
+								</form>
+							</c:if>
+						</td></tr>
+					</c:forEach>		
+				</table>
+			</c:if>
 		
 		</div>
 	</div>
