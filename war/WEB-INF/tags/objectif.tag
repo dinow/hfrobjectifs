@@ -3,7 +3,7 @@
 <%@ taglib uri="http://hfr.appsport.com/taglib/functions" prefix="hfr"%>
 
 <%@ attribute name="objectif" required="true" type="be.dno.hfrobjectifs.entities.Objectif"%>
-<table border="1">
+<table border="1" style="margin-bottom: 5px;">
 	<tr>
 		<th colspan="4" class="${hfr:getObjectifClass(objectif) }">${objectif.name } (${objectif.annee })</th>
 	</tr>
@@ -16,11 +16,11 @@
 	</c:if>
 	<c:if test="${!hfr:isEmptyString(objectif.poidsPrevu) }">
 		<tr>
-			<td>Poids</td><td>${objectif.poidsPrevu }</td>
-			<td>Poids</td><td>${objectif.poidsRealise }</td>
+			<td>Poids Prévu</td><td>${objectif.poidsPrevu }</td>
+			<td>Poids Atteind</td><td>${objectif.poidsRealise }</td>
 		</tr>
 	</c:if>
-	<c:if test="${!hfr:isEmptyString(objectif.evenementId) }">
+	<c:if test="${!hfr:isEmptyString(objectif.evenementId) && objectif.evenementId != -1 }">
 		<tr>
 			<td>Evenement</td>
 			<td colspan="3">
@@ -29,10 +29,14 @@
 			</td>
 		</tr>
 	</c:if>
-	<tr>
-		<td>Lien vers activité</td><td colspan="3"><a href="${objectif.lienActivite }" target="_blank">${objectif.lienActivite }</a></td>
-	</tr>
-	<tr>
-		<td>Lien vers CR</td><td colspan="3"><a href="${objectif.lienHFR }" target="_blank">${objectif.lienHFR }</a></td>
-	</tr>
+	<c:if test="${!hfr:isEmptyString(objectif.lienActivite) }">
+		<tr>
+			<td>Lien vers activité</td><td colspan="3"><a href="${objectif.lienActivite }" target="_blank">${objectif.lienActivite }</a></td>
+		</tr>
+	</c:if>
+	<c:if test="${!hfr:isEmptyString(objectif.lienHFR) }">
+		<tr>
+			<td>Lien vers CR</td><td colspan="3"><a href="${objectif.lienHFR }" target="_blank">${objectif.lienHFR }</a></td>
+		</tr>
+	</c:if>
 </table>

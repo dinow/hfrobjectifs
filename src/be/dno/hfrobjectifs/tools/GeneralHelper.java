@@ -184,8 +184,14 @@ public class GeneralHelper {
 	
 	public static List getUsers(){
 		List<User> users = userDao.getAll();
-		Collections.sort(users, new UserComparator());
-		return users;
+		List<User> usersWithStuff = new ArrayList<User>();
+		for (User user : users) {
+			if (!user.getObjectifsIds().isEmpty() && ! user.getEventParticipationIds().isEmpty()){
+				usersWithStuff.add(user);
+			}
+		}
+		Collections.sort(usersWithStuff, new UserComparator());
+		return usersWithStuff;
 	}
 	
 	public static List getObjectivesForUser(){

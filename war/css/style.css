@@ -170,3 +170,8 @@ div.userList{
 .resultKo{
 	background-color: #e13030 !important;
 }
+
+.userName{
+	vertical-align: top;
+	font-weight: bold;
+}

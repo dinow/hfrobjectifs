@@ -170,7 +170,7 @@ public class GenericController {
 		
 		
 		Evenement event;
-		if(eventId == null){
+		if(eventId == null || eventId.isEmpty()){
 			event = new Evenement();
 		}else{
 			event = eventDao.getById(Long.parseLong(eventId));
@@ -186,7 +186,7 @@ public class GenericController {
 		event.setType(type);
 		event.setDateEvenement(dateEvt);
 		
-		if(eventId == null){
+		if(eventId == null || eventId.isEmpty()){
 			List<Evenement> existings = evtDao.getEventByName(nom);
 			if (existings.size() > 0){
 				return new ModelAndView("myEvents","message","Un evenement avec ce nom existe déjà");

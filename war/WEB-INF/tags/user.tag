@@ -9,26 +9,35 @@
 
 <table border="1">
 	<tr>
-		<th>${user.hfrUserName }</th>
-	</tr>
-	<tr><td>
+		<td class="userName">${user.hfrUserName }</td>
+		<td>
 		<table>
-			<tr><th>Evenements</th></tr>
-			<tr><td>
-				<c:forEach var="participation" items="${participations }">
-					<tags:evenement event="${participation}"  />
-				</c:forEach>
-			</td></tr>
+			<tr>
+				<td>
+					<table>
+						<tr><th>Evenements</th></tr>
+						<tr><td>
+							<c:forEach var="participation" items="${participations }">
+								<tags:evenement event="${participation}"  />
+							</c:forEach>
+						</td></tr>
+					</table>
+				</td>
+				<td>
+					<table>
+						<tr><th>Objectifs</th></tr>
+						<tr><td style="padding-bottom: 5px;">
+							<c:forEach var="objectif" items="${objectifs }">
+								<tags:objectif objectif="${objectif}"  />
+							</c:forEach>
+						</td></tr>
+					</table>
+				</td>
+			</tr>
+		
 		</table>
-	</td></tr>
-	<tr><td>
-		<table>
-			<tr><th>Objectifs</th></tr>
-			<tr><td>
-				<c:forEach var="objectif" items="${objectifs }">
-					<tags:objectif objectif="${objectif}"  />
-				</c:forEach>
-			</td></tr>
-		</table>
+		
+		
+		
 	</td></tr>
 </table>
