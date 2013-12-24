@@ -5,7 +5,7 @@
 
 <c:set var="participants" value="${hfr:getParticipants(event)}"/>
 
-<table border="1">
+
 	<tr>
 		<th colspan="4">${event.name } (${event.dateEvenementStr })</th>
 	</tr>
@@ -36,4 +36,3 @@
 			</table>
 		</td>
 	</tr>
-</table>

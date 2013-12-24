@@ -15,11 +15,11 @@
 	<%@ include file="header.jsp"%>
 	<c:set var="users" value="${hfr:getUsers() }"/>
 	<div class="userList">	
-		<table class="noheadTable">
-			<tr><th>Utilisateurs</th></tr>
+		<table border="1">
+			<tr><th>User</th><th>Participations</th><th>Objectifs</th></tr>
 			<c:forEach items="${users}" var="user">
-				<tr><td><tags:user user="${user}"  /></td></tr>
-			</c:forEach>		
+				<tags:user user="${user}"  />
+			</c:forEach>
 		</table>
 	</div>
 </body>

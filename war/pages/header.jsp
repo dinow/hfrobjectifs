@@ -8,10 +8,6 @@
 		%>
 		<span class="dnoLink" onclick="displayDiv('preferenceDiv',true);"><%=userName %></span>
 	<%
-		}else{
-			%>
-			<table><tr><td style="padding-right: 20px;"><img src="./images/line_arrow_end.png" /></td><td><a href="<%= userService.createLoginURL("/myObjectives.do") %>" class="dnoLink" title="Se connecter">Connection</a></td></tr></table>	
-			<%
 		}
 		%>
 </div>

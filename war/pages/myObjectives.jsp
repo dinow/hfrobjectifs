@@ -62,30 +62,24 @@
 		</div>
 		<div class="existingObjectives">
 		
-			<table class="noheadTable">
-				<tr><th colspan="2">Objectifs existants</th></tr>
+			<table border="1">
+				<tr><th colspan="2" rowspan="2">&nbsp;</th><th colspan="2">Temps</th><th colspan="2">Poids</th><th rowspan="2">&nbsp;</th></tr>
+				<tr><th>Prévu</th><th>Réalisé</th><th>Prévu</th><th>Atteint</th></tr>
 				<c:forEach items="${objectives}" var="objective">
 					<c:set var="objective" value="${objective}" />
-					<tr><td>
-						<tags:objectif objectif="${objective}"  />
-						
-					</td>
-					<td style="vertical-align: top;">
-						<form action="/delete_objectif.do" method="post">
-							<input type="submit" value="Supprimer" />
-							<input type="hidden" value="${objective.id }" name="objectifId"/>
-						</form>
-						<form action="/edit_objectif.do" method="post">
-							<input type="submit" value="Editer" />
-							<input type="hidden" value="${objective.id }" name="objectifId"/>
-						</form>
-					</td>
-					</tr>
-				</c:forEach>		
+					<tags:objectif objectif="${objective}" editable="${true}" />
+				</c:forEach>
 			</table>
 		</div>
 	</div>
 	<%
+	}else{
+		%>
+		<div id="conteneur" class="mainPage">
+			<a href="<%= userService.createLoginURL("/myObjectives.do") %>" class="dnoLink" title="Se connecter">Connection</a>
+		</div>
+		
+		<%
 	}
 	
 	%>

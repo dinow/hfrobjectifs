@@ -100,6 +100,7 @@ public class GeneralHelper {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List getPublicObjectivesForUser(User user){
 		List<Objectif> retList = new ArrayList<Objectif>();
 		for (Long id : user.getObjectifsIds()){
@@ -111,6 +112,7 @@ public class GeneralHelper {
 		return retList;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List getParticipationsForUser(User user){
 		List<Evenement> retList = new ArrayList<Evenement>();
 		for (Long id : user.getEventParticipationIds()){
@@ -119,6 +121,7 @@ public class GeneralHelper {
 		return retList;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List getParticipants(Evenement evt){
 		List<User> retList = new ArrayList<User>();
 		List<User> allUsers = userDao.getAll();
@@ -149,6 +152,7 @@ public class GeneralHelper {
 		return ret;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static String getEventsDropDown(Objectif objectif){
 		Long selectedEvent = 0l;
 		if (objectif != null){
@@ -182,6 +186,7 @@ public class GeneralHelper {
 		return ret;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List getUsers(){
 		List<User> users = userDao.getAll();
 		List<User> usersWithStuff = new ArrayList<User>();
@@ -194,6 +199,7 @@ public class GeneralHelper {
 		return usersWithStuff;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List getObjectivesForUser(){
 		if (userService.getCurrentUser() == null){
 			return new ArrayList<Objectif>();
@@ -209,6 +215,7 @@ public class GeneralHelper {
 		return objectives;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static Map getEventsForUser(){
 		if (userService.getCurrentUser() == null){
 			Map<String, List<Evenement>> map = new HashMap<String,List<Evenement>>();
